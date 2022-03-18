@@ -41,7 +41,7 @@ INCLUDES    +=  assets
 OOT3DU 		:= OOT3DU
 OOT3DJ 		:= OOT3DJ
 OOT3DE 		:= OOT3DE
-Z3D			:= OOT3DU
+Z3D			:= OOT3DJ
 
 ifeq ($(OOT3DU), $(Z3D))
   LINK_SCRIPT 	:= oot.ld
