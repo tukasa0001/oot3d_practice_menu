@@ -12,7 +12,7 @@ void Equips_EquipsMenuInit(void){
         EquipsMenu.items[i+5].amount = gSaveContext.equips.buttonSlots[i];
     }
     for(u8 i = 0; i < 4; i++) {
-        EquipsMenu.items[EQUIP_SWORD + i].amount = (gSaveContext.equips.equipment >> i*4) & 0x3;
+        EquipsMenu.items[EQUIP_SWORD + i].amount = (gSaveContext.equips.equipment >> i*4) & 0xF; //装備の値表示を3以内に制限しない
     }
 
     EquipsMenu.items[EQUIP_TEMP_B].amount = gSaveContext.buttonStatus[0];
@@ -49,7 +49,7 @@ void Equips_ModifyGear(s32 selected){
     gSaveContext.equips.equipment = ((sword < 4) ? sword : 0) +
                                     (((shield < 4) ? shield : 0) << 4) +
                                     (((tunic < 4) ? tunic : 0) << 8) +
-                                    (((boots < 4) ? boots : 0) << 12);
+                                    (boots << 12);
 
     if(selected == EQUIP_SWORD) {
         switch (EquipsMenu.items[EQUIP_SWORD].amount) {
@@ -88,7 +88,7 @@ AmountMenu EquipsMenu = {
         {0, 0,   3, "Sword (0-3) - Swordless Flag OFF", .method = Equips_ModifyGear},
         {0, 0,   3, "Shield (0-3)", .method = Equips_ModifyGear},
         {0, 0,   3, "Tunic (0-3)", .method = Equips_ModifyGear},
-        {0, 0,   3, "Boots (0-3)", .method = Equips_ModifyGear},
+        {0, 0,   15, "Boots (0-15)", .method = Equips_ModifyGear},
         {0, 0, 255, "Temp B", .method = Equips_ModifyTempB},
     }
 };
